@@ -230,20 +230,14 @@ function renderInterview() {
     div.innerHTML = `
     
     <div class=" p-5  ">
-            <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">${interview.companyName}</h2>
-            <p class=" describe job-position text-base pb-4  text-[#777]">Senior Frontend Developer</p>
-            <p class="job-status pb-6 text-sm text-[#64748B] ">San Francisco, CA
-            •
-            Full-time
-            •
-            $130,000 - $175,000</p>
-            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No
-                applied</span></p>
-            <p class="notes description text-sm pb-6 text-[#323B49]">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You
-            will work with a talented team on cutting-edge projects.</p>
+            <h2 class="companyName text-xl font-semibold text-[#002C5C]">${interview.companyName}</h2>
+            <p class=" job-position text-base pb-4  text-[#777]">${interview.jobPosition}</p>
+            <p class="job-status pb-6 text-sm text-[#64748B] ">${interview.jobStatus}</p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">${interview.status}</span></p>
+            <p class="notes description text-sm pb-6 text-[#323B49]">${interview.notes}</p>
             <div class="flex gap-5">
               <button
-                class="thriving-btn interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
+                class=" interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
               <button
                 class="rejected-btn px-3 py-1 cursor-pointer hover:bg-[#ef4444] hover:text-black duration-300 border text-[#EF4444] border-red-600 font-semibold rounded">REJECTED</button>
             </div>
@@ -272,20 +266,14 @@ function renderRejected() {
     div.innerHTML = `
     
     <div class=" p-5  ">
-            <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">${rejected.companyName}</h2>
-            <p class=" describe job-position text-base pb-4  text-[#777]">Senior Frontend Developer</p>
-            <p class="job-status pb-6 text-sm text-[#64748B] ">San Francisco, CA
-            •
-            Full-time
-            •
-            $130,000 - $175,000</p>
-            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No
-                applied</span></p>
-            <p class="notes description text-sm pb-6 text-[#323B49]">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You
-            will work with a talented team on cutting-edge projects.</p>
+            <h2 class="companyName  text-xl font-semibold text-[#002C5C]">${rejected.companyName}</h2>
+            <p class=" job-position text-base pb-4  text-[#777]">${rejected.jobPosition}</p>
+            <p class="job-status pb-6 text-sm text-[#64748B] ">${rejected.jobStatus}</p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">${rejected.status}</span></p>
+            <p class="notes description text-sm pb-6 text-[#323B49]">${rejected.notes}</p>
             <div class="flex gap-5">
               <button
-                class="thriving-btn interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
+                class=" interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
               <button
                 class="rejected-btn px-3 py-1 cursor-pointer hover:bg-[#ef4444] hover:text-black duration-300 border text-[#EF4444] border-red-600 font-semibold rounded">REJECTED</button>
             </div>
