@@ -5,8 +5,9 @@ let currentStatus = 'all';
 
 //get count id
 let total = document.getElementById('total');
-let thriveingCount = document.getElementById('thriveing-count');
-let strugglingCount = document.getElementById('struggleing');
+let interviewCount = document.getElementById('interview-count');
+let rejectedCount = document.getElementById('rejected-count');
+const noJob = document.getElementById('no-job');
 
 //total card
 const allCard = document.getElementById('all-cards');
@@ -22,48 +23,93 @@ const allCard = document.getElementById('all-cards');
 
 function calculateCount() {
   total.innerText = allCard.querySelectorAll('.card').length;
-  thriveingCount.innerText = thrivingList.length;
-  strugglingCount.innerText = strugglingList.length;
+  interviewCount.innerText = interviewList.length;
+  rejectedCount.innerText = rejectedList.length;
 }
 calculateCount();
 
 //3 btn toggling
 const allFilterBtn = document.getElementById('all-filter-btn');
-const thrivingFilterBtn = document.getElementById('thriving-filter-btn');
-const strugglingFilterBtn = document.getElementById('struggling-filter-btn');
+const interviewFilterBtn = document.getElementById('interview-filter-btn');
+const rejectedFilterBtn = document.getElementById('rejected-filter-btn');
 
 //home btn toggle action
 function toggleStyle(id) {
-  allFilterBtn.classList.remove('bg-black', 'text-white');
-  thrivingFilterBtn.classList.remove('bg-black', 'text-white');
-  strugglingFilterBtn.classList.remove('bg-black', 'text-white');
+  allFilterBtn.classList.remove('bg-[#3B82F6]', 'text-white');
+  interviewFilterBtn.classList.remove('bg-[#3B82F6]', 'text-white');
+  rejectedFilterBtn.classList.remove('bg-[#3B82F6]', 'text-white');
 
   //add class bg and text
-  allFilterBtn.classList.add('bg-gray-300', 'text-black');
-  thrivingFilterBtn.classList.add('bg-gray-300', 'text-black');
-  strugglingFilterBtn.classList.add('bg-gray-300', 'text-black');
+  allFilterBtn.classList.add('bg-white', 'text-black');
+  interviewFilterBtn.classList.add('bg-white', 'text-black');
+  rejectedFilterBtn.classList.add('bg-white', 'text-black');
 
   //
   const selected = document.getElementById(id);
   currentStatus = id;
-  selected.classList.remove('bg-gray-300');
-  selected.classList.add('bg-black', 'text-white');
+  selected.classList.remove('bg-white');
+  selected.classList.add('bg-[#3B82F6]', 'text-white');
 
   //get render id
   const filterSection = document.getElementById('filtered-section');
-  const strugglSection = document.getElementById('struggled-section');
+  // const strugglSection = document.getElementById('struggled-section');
 
-  if (id === 'thriving-filter-btn') {
+  /* if (id === 'interview-filter-btn') {
+    if (interviewList.length == 0) {
+      noJob.classList.remove = 'hidden';
+    } else {
+      noJob.classList.add = 'hidden';
+    }
     allCard.classList.add('hidden');
     filterSection.classList.remove('hidden');
-    renderThriving();
+    renderInterview();
   } else if (id === 'all-filter-btn') {
+     if (allCard.children.length == 0) {
+       noJob.classList.remove = 'hidden';
+     } else {
+       noJob.classList.add = 'hidden';
+     }
     allCard.classList.remove('hidden');
     filterSection.classList.add('hidden');
-  } else if (id === 'struggling-filter-btn') {
+  } else if (id === 'rejected-filter-btn') {
+    if (rejectedList.length == 0) {
+      noJob.classList.remove = 'hidden';
+    } else {
+      noJob.classList.add = 'hidden';
+    }
     allCard.classList.add('hidden');
     filterSection.classList.remove('hidden');
-    renderStruggling();
+    renderRejected();
+  } */
+  
+  
+  if (id === 'interview-filter-btn') {
+    // এখানে ভুল ছিল, .remove('hidden') হবে
+    if (interviewList.length == 0) {
+      noJob.classList.remove('hidden');
+    } else {
+      noJob.classList.add('hidden');
+    }
+    allCard.classList.add('hidden');
+    filterSection.classList.remove('hidden');
+    renderInterview();
+  } else if (id === 'all-filter-btn') {
+    if (allCard.children.length == 0) {
+      noJob.classList.remove('hidden');
+    } else {
+      noJob.classList.add('hidden');
+    }
+    allCard.classList.remove('hidden');
+    filterSection.classList.add('hidden');
+  } else if (id === 'rejected-filter-btn') {
+    if (rejectedList.length == 0) {
+      noJob.classList.remove('hidden');
+    } else {
+      noJob.classList.add('hidden');
+    }
+    allCard.classList.add('hidden');
+    filterSection.classList.remove('hidden');
+    renderRejected();
   }
 }
 
@@ -72,11 +118,47 @@ const mainContainer = document.querySelector('main');
 
 //main function
 mainContainer.addEventListener('click', function (event) {
-  if (event.target.classList.contains('thriving-btn')) {
+  if (event.target.classList.contains('interview-btn')) {
     const parentNode = event.target.parentNode.parentNode.parentNode;
-    const plantName = parentNode.querySelector('.plantName').innerText;
+    const companyName = parentNode.querySelector('.companyName').innerText;
 
-    const describe = parentNode.querySelector('.describe').innerText;
+    const jobPosition = parentNode.querySelector('.job-position').innerText;
+
+    const jobStatus = parentNode.querySelector('.job-status').innerText;
+
+    const status = parentNode.querySelector('.status').innerText;
+
+    const notes = parentNode.querySelector('.notes').innerText;
+
+    parentNode.querySelector('.status').innerHTML =
+      ` <p id="status" class=" status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#10b981] text-white">Interview</span></p>`;
+
+    const cardInfo = {
+      companyName,
+      jobPosition,
+      jobStatus,
+      status,
+      notes,
+    };
+    const companyExist = interviewList.find(
+      (item) => item.companyName === cardInfo.companyName,
+    );
+
+    if (!companyExist) {
+      interviewList.push(cardInfo);
+    }
+    rejectedList = rejectedList.filter(
+      (item) => item.companyName != cardInfo.companyName,
+    );
+    calculateCount();
+    if (currentStatus == 'rejected-filter-btn') {
+      renderRejected();
+    }
+  } else if (event.target.classList.contains('rejected-btn')) {
+    const parentNode = event.target.parentNode.parentNode.parentNode;
+    const companyName = parentNode.querySelector('.companyName').innerText;
+
+    const jobPosition = parentNode.querySelector('.job-position').innerText;
 
     const jobStatus = parentNode.querySelector('.job-status').innerText;
 
@@ -85,80 +167,48 @@ mainContainer.addEventListener('click', function (event) {
     const notes = parentNode.querySelector('.notes').innerText;
 
     parentNode.querySelector('.status').innerHTML = `
-     <p id="status" class="status"><span class="border px-5 py-1 ">thrive</span></p>`;
+     <p id="status" class="status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EF4444] text-black">Rejected</span></p>
+    `;
 
     const cardInfo = {
-      plantName,
-      describe,
+      companyName,
+      jobPosition,
       jobStatus,
-      status: 'thrive',
+      status,
       notes,
     };
-    const plantExist = thrivingList.find(
-      (item) => item.plantName === cardInfo.plantName,
+    const companyExist = rejectedList.find(
+      (item) => item.companyName === cardInfo.companyName,
     );
 
-    if (!plantExist) {
-      thrivingList.push(cardInfo);
-    }
-    strugglingList = strugglingList.filter(
-      (item) => item.plantName != cardInfo.plantName,
-    );
-    calculateCount();
-    if (currentStatus == 'struggling-filter-btn') {
-      renderStruggling();
-    }
-  } else if (event.target.classList.contains('struggling-btn')) {
-    const parentNode = event.target.parentNode.parentNode.parentNode;
-    const plantName = parentNode.querySelector('.plantName').innerText;
-
-    const describe = parentNode.querySelector('.describe').innerText;
-
-    const jobStatus = parentNode.querySelector('.job-status').innerText;
-
-    const status = parentNode.querySelector('.status').innerText;
-
-    const notes = parentNode.querySelector('.notes').innerText;
-
-    parentNode.querySelector('.status').innerHTML = `
-     <p id="status" class="status"><span class="border px-5 py-1 ">struggling</span></p>`;
-
-    const cardInfo = {
-      plantName,
-      describe,
-      jobStatus,
-      status: 'struggle',
-      notes,
-    };
-    const plantExist = strugglingList.find(
-      (item) => item.plantName === cardInfo.plantName,
-    );
-
-    if (!plantExist) {
-      strugglingList.push(cardInfo);
+    if (!companyExist) {
+      rejectedList.push(cardInfo);
     }
 
-    thrivingList = thrivingList.filter(
-      (item) => item.plantName != cardInfo.plantName,
+    interviewList = interviewList.filter(
+      (item) => item.companyName != cardInfo.companyName,
     );
-    if (currentStatus == 'thriving-filter-btn') {
-      renderThriving();
+    if (currentStatus == 'interview-filter-btn') {
+      renderInterview();
     }
 
     calculateCount();
+    //delete card
   }
-  
-  else if (event.target.classList.contains('delete-btn')) {
+  if (event.target.classList.contains('delete-btn')) {
     const parentNode = event.target.closest('.card');
-    const plantName = parentNode.querySelector('.plantName').innerText;
+    const companyName = parentNode.querySelector('.companyName').innerText;
 
-    // UI theke card remove
+    // remove from ui
     parentNode.remove();
 
-    // Array theke data remove
-    thrivingList = thrivingList.filter((item) => item.plantName !== plantName);
-    strugglingList = strugglingList.filter(
-      (item) => item.plantName !== plantName,
+    // remove from array
+    interviewList = interviewList.filter(
+      (item) => item.companytName !== companyName,
+    );
+
+    rejectedList = rejectedList.filter(
+      (item) => item.companyName !== companyName,
     );
 
     // Dashboard update
@@ -169,31 +219,40 @@ mainContainer.addEventListener('click', function (event) {
 //get filtersection
 const filterSEction = document.getElementById('filtered-section'); //empty section
 
-//rendering thriving
-function renderThriving() {
+//rendering interview
+function renderInterview() {
   filterSEction.innerHTML = '';
-  for (let thrive of thrivingList) {
+  for (let interview of interviewList) {
     let div = document.createElement('div');
 
-    div.className =
-      'card shadow rounded flex flex-col md:flex-row justify-between';
+    div.className = 'card shadow rounded flex  justify-between ';
 
     div.innerHTML = `
     
-    <div class=" p-5 space-y-3 ">
-            <h2 class="plantName text-2xl font-semibold bg-white">${thrive.plantName}</h2>
-            <p class=" describe text-sm text-[#777]">Lorem ipsum dolor sit amet.</p>
-            <p class="job-status">remote .fulltime</p>
-            <p id="status" class=" status"><span class="border px-5 py-1">${thrive.status}</span></p>
-            <p class="notes">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, accusamus.</p>
+    <div class=" p-5  ">
+            <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">${interview.companyName}</h2>
+            <p class=" describe job-position text-base pb-4  text-[#777]">Senior Frontend Developer</p>
+            <p class="job-status pb-6 text-sm text-[#64748B] ">San Francisco, CA
+            •
+            Full-time
+            •
+            $130,000 - $175,000</p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No
+                applied</span></p>
+            <p class="notes description text-sm pb-6 text-[#323B49]">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You
+            will work with a talented team on cutting-edge projects.</p>
             <div class="flex gap-5">
-              <button class="thriving-btn px-7 py-1 border border-green-400 font-semibold rounded">Triving</button>
-              <button class="struggling-btn px-7 py-1 border border-red-400 font-semibold rounded">struggling</button>
+              <button
+                class="thriving-btn interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
+              <button
+                class="rejected-btn px-3 py-1 cursor-pointer hover:bg-[#ef4444] hover:text-black duration-300 border text-[#EF4444] border-red-600 font-semibold rounded">REJECTED</button>
             </div>
 
           </div>
           <div class="p-5">
-            <button class=" delete-btn px-7 py-1 bg-red-100 text-red-600 font-semibold rounded">delete</button>
+            <button id="delete-btn"
+              class=" delete-btn p-1 hover:bg-gray-300 duration-300 cursor-pointer text-sm  text-[#64748B] rounded-full font-semibold border "><i
+                class="fa-solid fa-trash-can"></i></button>
           </div>
           
     `;
@@ -203,30 +262,41 @@ function renderThriving() {
 }
 
 //rendering struggling
-function renderStruggling() {
+function renderRejected() {
   filterSEction.innerHTML = '';
-  for (let struggle of strugglingList) {
+  for (let rejected of rejectedList) {
     let div = document.createElement('div');
 
-    div.className =
-      'card shadow rounded flex flex-col md:flex-row justify-between';
+    div.className = 'card shadow rounded flex  justify-between ';
 
     div.innerHTML = `
-    <div class=" p-5 space-y-3 mb-5">
-            <h2 class="plantName text-2xl font-semibold bg-white">${struggle.plantName}</h2>
-            <p class=" describe text-sm text-[#777]">Lorem ipsum dolor sit amet.</p>
-            <p class="job-status">remote .fulltime</p>
-            <p id="status" class=" status"><span class="border px-5 py-1">${struggle.status}</span></p>
-            <p class="notes">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi, accusamus.</p>
+    
+    <div class=" p-5  ">
+            <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">${rejected.companyName}</h2>
+            <p class=" describe job-position text-base pb-4  text-[#777]">Senior Frontend Developer</p>
+            <p class="job-status pb-6 text-sm text-[#64748B] ">San Francisco, CA
+            •
+            Full-time
+            •
+            $130,000 - $175,000</p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No
+                applied</span></p>
+            <p class="notes description text-sm pb-6 text-[#323B49]">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You
+            will work with a talented team on cutting-edge projects.</p>
             <div class="flex gap-5">
-              <button class="thriving-btn px-7 py-1 border border-green-400 font-semibold rounded">Triving</button>
-              <button class="struggling-btn px-7 py-1 border border-red-400 font-semibold rounded">struggling</button>
+              <button
+                class="thriving-btn interview-btn cursor-pointer px-3 py-1 border border-green-400 font-semibold text-base rounded hover:bg-[#10b981] hover:text-black duration-300 text-[#10B981]">INTERVIEW</button>
+              <button
+                class="rejected-btn px-3 py-1 cursor-pointer hover:bg-[#ef4444] hover:text-black duration-300 border text-[#EF4444] border-red-600 font-semibold rounded">REJECTED</button>
             </div>
 
           </div>
           <div class="p-5">
-            <button class=" delete-btn px-7 py-1 bg-red-100 text-red-600 font-semibold rounded">delete</button>
+            <button id="delete-btn"
+              class=" delete-btn p-1 hover:bg-gray-300 duration-300 cursor-pointer text-sm  text-[#64748B] rounded-full font-semibold border "><i
+                class="fa-solid fa-trash-can"></i></button>
           </div>
+          
     `;
     calculateCount();
     filterSEction.appendChild(div);

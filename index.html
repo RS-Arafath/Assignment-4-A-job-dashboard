@@ -38,12 +38,12 @@
 
         <div class=" text-left p-5 shadow rounded-lg bg-[##FFFFFF]">
           <p class="text-[#323B49] text-sm">Interview</p>
-          <h3 id="total" class="font-bold text-2xl text-[#10B981]">0</h3>
+          <h3 id="interview-count" class="font-bold text-2xl text-[#10B981]">0</h3>
         </div>
 
         <div class=" text-left p-5 shadow rounded-lg bg-[##FFFFFF]">
           <p class="text-[#323B49] text-sm">Rejected</p>
-          <h3 id="total" class="font-bold text-2xl text-[#EF4444]">0</h3>
+          <h3 id="rejected-count" class="font-bold text-2xl text-[#EF4444]">0</h3>
         </div>
 
       </div>
@@ -58,11 +58,11 @@
         <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn"
           class="px-7 py-2 shadow rounded bg-[#3B82F6] text-white">All</button>
 
-        <button onclick="toggleStyle('interview-filter-btn')" id="thriving-filter-btn"
-          class="px-7 text-sm font-semibold py-2 shadow rounded text-[#64748B] bg-white">Interview</button>
+        <button onclick="toggleStyle('interview-filter-btn')" id="interview-filter-btn"
+          class="px-7 text-sm font-semibold py-2 shadow rounded  bg-white">Interview</button>
 
-        <button onclick="toggleStyle('Rejected-filter-btn')" id="struggling-filter-btn"
-          class="px-7 text-sm font-semibold py-2 shadow rounded text-[#64748B] bg-white">Rejected</button>
+        <button onclick="toggleStyle('rejected-filter-btn')" id="rejected-filter-btn"
+          class="px-7 text-sm font-semibold py-2 shadow rounded  bg-white">Rejected</button>
       </div>
 
 
@@ -87,8 +87,7 @@
               Full-time
               •
               $130,000 - $175,000</p>
-            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No
-                applied</span></p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">No applied</span></p>
             <p class="notes description text-sm pb-6 text-[#323B49]">Build cross-platform mobile applications using
               React Native. Work on products used by millions of users worldwide.</p>
             <div class="flex gap-5">
@@ -107,7 +106,7 @@
         </div>
 
         <!-- ~~card 2~~~ -->
-        <div class=" card shadow rounded flex  justify-between ">
+        <div class="card shadow rounded flex  justify-between ">
           <div class=" p-5  ">
             <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">WebFlow Agency</h2>
             <p class=" describe job-position text-base pb-4  text-[#777]">Web Designer & Developer</p>
@@ -136,7 +135,7 @@
         </div>
 
         <!-- ~~~card 3~~~~ -->
-        <div class=" card shadow rounded flex  justify-between ">
+        <div class="card shadow rounded flex  justify-between ">
           <div class=" p-5  ">
             <h2 class="companyName plantname text-xl font-semibold text-[#002C5C]">DataViz Solutions</h2>
             <p class=" describe job-position text-base pb-4  text-[#777]">Data Visualization Specialist</p>
@@ -307,6 +306,15 @@
           </div>
         </div>
 
+      </section>
+
+      <section id="no-job" class="hidden">
+        <div class=" items-center text-center py-12 shadow rounded flex flex-col justify-center">
+          <img src="./images/jobs.png" alt="no_job">
+          <h2 class="font-bold text-2xl">No jobs available</h2>
+          <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+
+        </div>
       </section>
 
     </main>
