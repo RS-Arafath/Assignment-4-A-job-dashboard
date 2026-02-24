@@ -81,8 +81,7 @@ function toggleStyle(id) {
     filterSection.classList.remove('hidden');
     renderRejected();
   } */
-  
-  
+
   if (id === 'interview-filter-btn') {
     // এখানে ভুল ছিল, .remove('hidden') হবে
     if (interviewList.length == 0) {
@@ -137,7 +136,7 @@ mainContainer.addEventListener('click', function (event) {
       companyName,
       jobPosition,
       jobStatus,
-      status,
+      status: 'Interview',
       notes,
     };
     const companyExist = interviewList.find(
@@ -174,7 +173,7 @@ mainContainer.addEventListener('click', function (event) {
       companyName,
       jobPosition,
       jobStatus,
-      status,
+      status: 'Rejected',
       notes,
     };
     const companyExist = rejectedList.find(
@@ -204,7 +203,7 @@ mainContainer.addEventListener('click', function (event) {
 
     // remove from array
     interviewList = interviewList.filter(
-      (item) => item.companytName !== companyName,
+      (item) => item.companyName !== companyName,
     );
 
     rejectedList = rejectedList.filter(
@@ -233,7 +232,7 @@ function renderInterview() {
             <h2 class="companyName text-xl font-semibold text-[#002C5C]">${interview.companyName}</h2>
             <p class=" job-position text-base pb-4  text-[#777]">${interview.jobPosition}</p>
             <p class="job-status pb-6 text-sm text-[#64748B] ">${interview.jobStatus}</p>
-            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">${interview.status}</span></p>
+            <p id="status" class="pb-5  status"><span class=" px-5 py-2 font-semibold text-base rounded bg-[#10B981] text-white">${interview.status}</span></p>
             <p class="notes description text-sm pb-6 text-[#323B49]">${interview.notes}</p>
             <div class="flex gap-5">
               <button
@@ -269,7 +268,7 @@ function renderRejected() {
             <h2 class="companyName  text-xl font-semibold text-[#002C5C]">${rejected.companyName}</h2>
             <p class=" job-position text-base pb-4  text-[#777]">${rejected.jobPosition}</p>
             <p class="job-status pb-6 text-sm text-[#64748B] ">${rejected.jobStatus}</p>
-            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EEF4FF]">${rejected.status}</span></p>
+            <p id="status" class="pb-5 status"><span class=" px-5 py-2 font-semibold text-base rounded  bg-[#EF4444]">${rejected.status}</span></p>
             <p class="notes description text-sm pb-6 text-[#323B49]">${rejected.notes}</p>
             <div class="flex gap-5">
               <button
