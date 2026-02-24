@@ -11,16 +11,8 @@ const noJob = document.getElementById('no-job');
 
 //total card
 const allCard = document.getElementById('all-cards');
-// const totalChild = allCard.children.length;
 
-//macine function ->calculate count
-// function calculateCount() {
-//   total.innerText = totalChild;
-//   thriveingCount.innerText = thrivingList.length;
-//   strugglingCount.innerText = strugglingList.length;
-// }
-// calculateCount();
-
+//calculate count
 function calculateCount() {
   total.innerText = allCard.querySelectorAll('.card').length;
   interviewCount.innerText = interviewList.length;
@@ -28,7 +20,7 @@ function calculateCount() {
 }
 calculateCount();
 
-//3 btn toggling
+//3) btn toggling
 const allFilterBtn = document.getElementById('all-filter-btn');
 const interviewFilterBtn = document.getElementById('interview-filter-btn');
 const rejectedFilterBtn = document.getElementById('rejected-filter-btn');
@@ -54,36 +46,10 @@ function toggleStyle(id) {
   const filterSection = document.getElementById('filtered-section');
   // const strugglSection = document.getElementById('struggled-section');
 
-  /* if (id === 'interview-filter-btn') {
-    if (interviewList.length == 0) {
-      noJob.classList.remove = 'hidden';
-    } else {
-      noJob.classList.add = 'hidden';
-    }
-    allCard.classList.add('hidden');
-    filterSection.classList.remove('hidden');
-    renderInterview();
-  } else if (id === 'all-filter-btn') {
-     if (allCard.children.length == 0) {
-       noJob.classList.remove = 'hidden';
-     } else {
-       noJob.classList.add = 'hidden';
-     }
-    allCard.classList.remove('hidden');
-    filterSection.classList.add('hidden');
-  } else if (id === 'rejected-filter-btn') {
-    if (rejectedList.length == 0) {
-      noJob.classList.remove = 'hidden';
-    } else {
-      noJob.classList.add = 'hidden';
-    }
-    allCard.classList.add('hidden');
-    filterSection.classList.remove('hidden');
-    renderRejected();
-  } */
+  
 
   if (id === 'interview-filter-btn') {
-    // এখানে ভুল ছিল, .remove('hidden') হবে
+   
     if (interviewList.length == 0) {
       noJob.classList.remove('hidden');
     } else {
@@ -194,7 +160,7 @@ mainContainer.addEventListener('click', function (event) {
     calculateCount();
     //delete card
   }
-  if (event.target.classList.contains('delete-btn')) {
+  if (event.target.closest('.delete-btn')) {
     const parentNode = event.target.closest('.card');
     const companyName = parentNode.querySelector('.companyName').innerText;
 
