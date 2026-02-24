@@ -46,10 +46,7 @@ function toggleStyle(id) {
   const filterSection = document.getElementById('filtered-section');
   // const strugglSection = document.getElementById('struggled-section');
 
-  
-
   if (id === 'interview-filter-btn') {
-   
     if (interviewList.length == 0) {
       noJob.classList.remove('hidden');
     } else {
@@ -160,7 +157,7 @@ mainContainer.addEventListener('click', function (event) {
     calculateCount();
     //delete card
   }
-  if (event.target.closest('.delete-btn')) {
+  if (event.target.classList.contains('delete-btn')) {
     const parentNode = event.target.closest('.card');
     const companyName = parentNode.querySelector('.companyName').innerText;
 
@@ -192,9 +189,9 @@ function renderInterview() {
 
     div.className = 'card shadow rounded flex  justify-between ';
 
-    div.innerHTML = `
+    div.innerHTML = ` 
     
-    <div class=" p-5  ">
+    <div class=" p-5 ">
             <h2 class="companyName text-xl font-semibold text-[#002C5C]">${interview.companyName}</h2>
             <p class=" job-position text-base pb-4  text-[#777]">${interview.jobPosition}</p>
             <p class="job-status pb-6 text-sm text-[#64748B] ">${interview.jobStatus}</p>
@@ -213,6 +210,7 @@ function renderInterview() {
               class=" delete-btn p-1 hover:bg-gray-300 duration-300 cursor-pointer text-sm  text-[#64748B] rounded-full font-semibold border "><i
                 class="fa-solid fa-trash-can"></i></button>
           </div>
+          
           
     `;
     calculateCount();
